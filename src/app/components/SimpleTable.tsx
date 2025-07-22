@@ -14,7 +14,7 @@ export type SimpleTableProps = {
   title?: string;
 };
 
-function SimpleTable<T extends object>({ data, columns, pageSize = 10, pageIndex: controlledPageIndex, onPageChange, onPageSizeChange, className, title }: SimpleTableProps<T>) {
+function SimpleTable({ data, columns, pageSize = 10, pageIndex: controlledPageIndex, onPageChange, onPageSizeChange, className, title }: SimpleTableProps) {
   const [internalPageIndex, setInternalPageIndex] = useState(0);
   const [internalPageSize, setInternalPageSize] = useState(pageSize);
   

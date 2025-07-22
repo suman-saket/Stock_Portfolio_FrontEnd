@@ -13,8 +13,12 @@ export interface Stock {
     earnings?: number;
 }
 
+export interface CellInfo {
+    getValue: () => string | number | undefined;
+}
+
 export interface TableColumn {
     accessorKey: keyof Stock;
     header: string;
-    cell?: (info: { getValue: () => any }) => string;
+    cell?: (info: CellInfo) => string;
 }

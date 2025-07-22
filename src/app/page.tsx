@@ -2,7 +2,7 @@
 import React, { useMemo, useState, useCallback, useEffect } from "react";
 import SimpleTable from "./components/SimpleTable";
 import { API_ENDPOINTS, USER_ID } from "@/config/api";
-import { Stock, TableColumn } from "@/types/stock";
+import { Stock, TableColumn, CellInfo } from "@/types/stock";
 
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-US', {
@@ -109,11 +109,11 @@ export default function Home() {
 
   const columns: TableColumn[] = useMemo(() => [
     { accessorKey: "stockName", header: "Stock Name" },
-    { accessorKey: "purchasePrice", header: "Purchase Price", cell: (info: any) => `₹${info.getValue()}` },
+    { accessorKey: "purchasePrice", header: "Purchase Price", cell: (info: CellInfo) => `₹${info.getValue()}` },
     { accessorKey: "quantity", header: "Qty" },
-    { accessorKey: "investment", header: "Investment", cell: (info: any) => `₹${info.getValue()}` },
-    { accessorKey: "portfolio", header: "Portfolio %", cell: (info: any) => `${info.getValue()}%` },
-    { accessorKey: "cmp", header: "CMP", cell: (info: any) => `₹${Number(info.getValue()).toFixed(2)}` },
+    { accessorKey: "investment", header: "Investment", cell: (info: CellInfo) => `₹${info.getValue()}` },
+    { accessorKey: "portfolio", header: "Portfolio %", cell: (info: CellInfo) => `${info.getValue()}%` },
+    { accessorKey: "cmp", header: "CMP", cell: (info: CellInfo) => `₹${Number(info.getValue() || 0).toFixed(2)}` },
     { accessorKey: "exchangeCode", header: "Exchange Code" },
     { accessorKey: "peRatio", header: "P/E Ratio" },
     { accessorKey: "earnings", header: "Earnings" },
