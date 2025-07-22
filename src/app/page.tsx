@@ -27,11 +27,15 @@ export default function Home() {
   });
 
    useEffect(() => {
+    setIsLoading(true);
     fetch(API_ENDPOINTS.PORTFOLIO.LIVE)
       .then((res) => res.json())
       .then((stocks) => {
-      setData(stocks);
-    });
+        setData(stocks);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, []);
 
   const sectors = useMemo(() => {
@@ -218,7 +222,18 @@ export default function Home() {
               </select>
             </div>
           </div>
-          <SimpleTable data={filteredData} columns={columns} pageSize={10} />
+          {isLoading ? (
+            <div className="space-y-4">
+              <div className="h-12 bg-gray-200 rounded-xl animate-pulse"></div>
+              <div className="space-y-3">
+                {Array.from({ length: 5 }).map((_, index) => (
+                  <div key={index} className="h-16 bg-gray-100 rounded-xl animate-pulse"></div>
+                ))}
+              </div>
+            </div>
+          ) : (
+            <SimpleTable data={filteredData} columns={columns} pageSize={10} />
+          )}
         </div>
 
         {isModalOpen && (
