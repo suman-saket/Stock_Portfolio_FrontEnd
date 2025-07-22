@@ -1,7 +1,8 @@
 "use client";
-import React, { useMemo, useState, useCallback,useEffect } from "react";
+import React, { useMemo, useState, useCallback, useEffect } from "react";
 import SimpleTable from "./components/SimpleTable";
 import { API_ENDPOINTS, USER_ID } from "@/config/api";
+import { Stock, TableColumn } from "@/types/stock";
 
 const formatCurrency = (amount: number): string => {
   return new Intl.NumberFormat('en-US', {
@@ -13,7 +14,7 @@ const formatCurrency = (amount: number): string => {
 export default function Home() {
   const [sector, setSector] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [data, setData] = useState<any[]>([]);
+  const [data, setData] = useState<Stock[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState({
     stockName: "",
@@ -106,7 +107,7 @@ export default function Home() {
     setIsModalOpen(true);
   }, []);
 
-  const columns = useMemo(() => [
+  const columns: TableColumn[] = useMemo(() => [
     { accessorKey: "stockName", header: "Stock Name" },
     { accessorKey: "purchasePrice", header: "Purchase Price", cell: (info: any) => `₹${info.getValue()}` },
     { accessorKey: "quantity", header: "Qty" },

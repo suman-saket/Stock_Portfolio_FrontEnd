@@ -1,9 +1,11 @@
+"use client"
 import React, { useState, useMemo, useCallback } from "react";
 import { useReactTable, getCoreRowModel, flexRender, ColumnDef } from "@tanstack/react-table";
+import { Stock, TableColumn } from "@/types/stock";
 
-export type SimpleTableProps<T extends object> = {
-  data: T[];
-  columns: ColumnDef<T, any>[];
+export type SimpleTableProps = {
+  data: Stock[];
+  columns: TableColumn[];
   pageSize?: number;
   pageIndex?: number;
   onPageChange?: (page: number) => void;
